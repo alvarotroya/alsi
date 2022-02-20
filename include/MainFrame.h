@@ -15,19 +15,19 @@ public:
 	MainFrame();
 	~MainFrame();
 
-	virtual void cleanup() = 0;
+	virtual void cleanup()    = 0;
 	virtual void initWindow() = 0;
-	virtual void mainLoop() = 0;
+	virtual void mainLoop()   = 0;
 
 protected:
 
 	unsigned int width;
 	unsigned int height;
 	std::string windowname;
-
+	void FatalError(std::string errormessage){};
 private:
+
+
 };
-
-
 
 #endif

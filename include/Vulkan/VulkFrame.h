@@ -14,7 +14,6 @@ class VulkFrame : public virtual MainFrame
 -
 - VulkFrame is used to represent a Window based on
 - Vulkan api.
-- This class inherits from MainFrame 
 - 
 ------------------------------------------------*/
 

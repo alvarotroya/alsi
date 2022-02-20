@@ -9,7 +9,7 @@ SUB_DIRS       = $(dir $(wildcard $(SRC_DIRS)/*/))
 SRC_FILES      = $(wildcard $(SRC_DIRS)/*/*.cpp) $(wildcard $(SRC_DIRS)/*.cpp)
 HDR_FILES      = $(wildcard $(INCLUDE_DIRS)/*/*.h) $(wildcard $(INCLUDE_DIRS)/*.h)
 INCLUDE        = $(INCLUDE_DIRS)
-
+DEBUG_MODE     = -DDEBUG
 
 
 OBJECT_SUB_DIR = $(patsubst $(SRC_DIRS)/%,%,$(SUB_DIRS))
@@ -23,11 +23,11 @@ compile: build_environment start_notification $(BIN) end_notification
 
 .PHONY:$(BIN)
 $(BIN): mid_notification $(OBJECTS) compile_binary
-	$(CXX) $(CPPFLAGS) $(LDFLAGS) $(OBJECTS) -o $@
+	$(CXX) $(CPPFLAGS) $(DEBUG_MODE) $(LDFLAGS) $(OBJECTS) -o $@
 
 
 $(BASE_OBJECT_DIR)/%.o:$(SRC_DIRS)/%.cpp 
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -I$(INCLUDE) -o $@ $^ -c
+	$(CXX) $(CPPFLAGS) $(DEBUG_MODE) $(CXXFLAGS) -I$(INCLUDE) -o $@ $^ -c
 
 
 .PHONY: build_environment
@@ -42,21 +42,21 @@ start_notification:
 
 mid_notification:
 	@echo "========================================="
-	@echo "=          Compiling Object files       ="
+	@echo "=          compiling object files       ="
 	@echo "========================================="
 
 end_notification:
 	@echo "========================================="
-	@echo "=           End Compiling               ="
+	@echo "=           end compiling               ="
 	@echo "========================================="
 
 compile_binary:
 	@echo "========================================="
-	@echo "=           Compile Binary              ="
+	@echo "=           compile binary              ="
 	@echo "========================================="
 
 .PHONY:clean
 clean:
-	rm -rf $(BIN) $(BASE_OBJECT_DIR)
+	rm -rf $(BIN) $(BASE_OBJECT_DIR) *.log
 
 
